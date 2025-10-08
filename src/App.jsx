@@ -8,7 +8,7 @@ function Header() {
   return (
     <div>
       <h1>Cartelera Comunidad Castillo</h1>
-      <h2>Octubre 2025</h2>
+      <h2 style={{ color: 'yellow' }}>Octubre 2025</h2>
     </div>
   )
 }
