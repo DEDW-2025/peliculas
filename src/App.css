@@ -1,0 +1,14 @@
+body {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.movie img {
+  max-width: 100%;
+}
+
+.movie-list {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
