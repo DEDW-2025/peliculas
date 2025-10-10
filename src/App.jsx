@@ -15,6 +15,7 @@ function App() {
   return (
     <>
       <Header />
+      <input style={{ marginBottom: '10px' }} />
       <div className="movie-list">
         {movies.map(movie => (
           <Movie
