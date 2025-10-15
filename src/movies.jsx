@@ -1,15 +1,19 @@
 import { useState } from "react"
 import styles from './movies.module.css'
 
-export default function Movie({ name, description, image }) {
+export default function Movie({ id, name, description, image }) {
   // "lógica del componente"
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(
+    localStorage.getItem(`${id}`) === 'true'
+  )
 
   const onClick = () => {
     if (isFavorite) {
       setIsFavorite(false)
+      localStorage.removeItem(`${id}`)
     } else {
       setIsFavorite(true)
+      localStorage.setItem(`${id}`, 'true')
     }
     // setIsFavorite(!isFavorite)
   }
