@@ -1,5 +1,4 @@
 import { useState } from "react"
-import styles from './movies.module.css'
 
 export default function Movie({ id, name, description, image }) {
   // "lógica del componente"
@@ -20,7 +19,7 @@ export default function Movie({ id, name, description, image }) {
 
   // "renderizado" (JSX)
   return (
-    <div className={styles.movie}>
+    <div>
       <img src={image} />
       <h3>{name}</h3>
       <p>{description}</p>

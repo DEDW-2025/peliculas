@@ -1,4 +1,4 @@
-import './App.css'
+import { Button } from '@mui/material'
 import Movie from './movies.jsx'
 import { useState, useEffect } from 'react'
 
@@ -65,6 +65,9 @@ function App() {
   return (
     <>
       <Header />
+      <Button variant="contained">
+        Hello World!
+      </Button>
       <select
         value={movieType}
         onChange={handleSelectChange}
