@@ -3,6 +3,7 @@ import Movie from './movies.jsx'
 import { useState, useEffect } from 'react'
 import { useLanguage } from './LanguageContext.jsx'
 import { useMovies } from './hooks.js'
+import SearchAppBar from './Header.jsx'
 
 function Header() {
   return (
@@ -50,6 +51,10 @@ function App() {
 
   return (
     <>
+      <SearchAppBar
+        value={searchText}
+        onChange={handleInputChange}
+      />
       <select
         value={language}
         onChange={(event) => setLanguage(event.target.value)}
@@ -76,11 +81,6 @@ function App() {
           En cartelera
         </option>
       </select>
-      <input
-        value={searchText}
-        style={{ marginBottom: '10px' }}
-        onChange={handleInputChange}
-      />
       <div className="movie-list">
         {movies.filter(filterMovie).map(movie => (
           <Movie
