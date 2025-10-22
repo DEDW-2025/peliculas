@@ -4,8 +4,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
-export default function SearchAppBar({ value, onChange }) {
+export default function SearchAppBar({ value, onChange, language, onLanguageChange }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -18,15 +20,79 @@ export default function SearchAppBar({ value, onChange }) {
           >
             Cartelera Comunidad Castillo
           </Typography>
-          <div>
-            <SearchIcon />
+          <Box
+            sx={{
+              position: 'relative',
+              borderRadius: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.25)',
+              },
+              marginLeft: { xs: 0, sm: 1 },
+              width: { xs: '100%', sm: 'auto' },
+            }}
+          >
+            <Box
+              sx={{
+                padding: '0 16px',
+                height: '100%',
+                position: 'absolute',
+                pointerEvents: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <SearchIcon />
+            </Box>
             <InputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
               value={value}
               onChange={onChange}
+              sx={{
+                color: 'inherit',
+                width: '100%',
+                '& .MuiInputBase-input': {
+                  padding: '8px 8px 8px 0',
+                  paddingLeft: 'calc(1em + 32px)',
+                  transition: 'width 0.3s',
+                  width: { xs: '100%', sm: '12ch' },
+                  '&:focus': {
+                    width: { sm: '20ch' },
+                  },
+                },
+              }}
             />
-          </div>
+          </Box>
+          <Select
+            value={language}
+            onChange={onLanguageChange}
+            sx={{
+              color: 'white',
+              marginLeft: 2,
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'rgba(255, 255, 255, 0.5)',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              },
+              '& .MuiSvgIcon-root': {
+                color: 'white',
+              },
+            }}
+            size="small"
+          >
+            <MenuItem value="es-CL">
+              {language === "es-CL" ? 'Español' : 'Spanish'}
+            </MenuItem>
+            <MenuItem value="en">
+              {language === "es-CL" ? 'Inglés' : 'English'}
+            </MenuItem>
+          </Select>
         </Toolbar>
       </AppBar>
     </Box>

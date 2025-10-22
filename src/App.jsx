@@ -1,18 +1,9 @@
-import { Button } from '@mui/material'
+import { Button, Container, Box, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 import Movie from './movies.jsx'
 import { useState, useEffect } from 'react'
 import { useLanguage } from './LanguageContext.jsx'
 import { useMovies } from './hooks.js'
 import SearchAppBar from './Header.jsx'
-
-function Header() {
-  return (
-    <div>
-      <h1>Cartelera Comunidad Castillo</h1>
-      <h2 style={{ color: 'yellow' }}>Octubre 2025</h2>
-    </div>
-  )
-}
 
 function App() {
   const [searchText, setSearchText] = useState('')
@@ -54,44 +45,37 @@ function App() {
       <SearchAppBar
         value={searchText}
         onChange={handleInputChange}
+        language={language}
+        onLanguageChange={(event) => setLanguage(event.target.value)}
       />
-      <select
-        value={language}
-        onChange={(event) => setLanguage(event.target.value)}
-      >
-        <option value="es-CL">
-          {language == "es-CL" ? 'Español' : 'Spanish'}
-        </option>
-        <option value="en">
-          {language == "es-CL" ? 'Inglés' : 'English'}
-        </option>
-      </select>
-      <Header />
-      <Button variant="contained">
-        Hello World!
-      </Button>
-      <select
-        value={movieType}
-        onChange={handleSelectChange}
-      >
-        <option value="upcoming">
-          Próximas películas
-        </option>
-        <option value="now_playing">
-          En cartelera
-        </option>
-      </select>
-      <div className="movie-list">
-        {movies.filter(filterMovie).map(movie => (
-          <Movie
-            key={movie.id}
-            id={movie.id}
-            name={movie.title}
-            description={movie.overview}
-            image={movie.poster_path}
-          />
-        ))}
-      </div>
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        <Box sx={{ mb: 3 }}>
+          <FormControl sx={{ minWidth: 200 }}>
+            <InputLabel id="movie-type-label">Tipo de película</InputLabel>
+            <Select
+              labelId="movie-type-label"
+              value={movieType}
+              onChange={handleSelectChange}
+              label="Tipo de película"
+            >
+              <MenuItem value="upcoming">Próximas películas</MenuItem>
+              <MenuItem value="now_playing">En cartelera</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Grid container spacing={3}>
+          {movies.filter(filterMovie).map(movie => (
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={movie.id}>
+              <Movie
+                id={movie.id}
+                name={movie.title}
+                description={movie.overview}
+                image={movie.poster_path}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </>
   )
 }
