@@ -1,6 +1,8 @@
 import { Button } from '@mui/material'
 import Movie from './movies.jsx'
 import { useState, useEffect } from 'react'
+import { useLanguage } from './LanguageContext.jsx'
+import { useMovies } from './hooks.js'
 
 function Header() {
   return (
@@ -13,29 +15,13 @@ function Header() {
 
 function App() {
   const [searchText, setSearchText] = useState('')
-  const [movies, setMovies] = useState([])
   const [movieType, setMovieType] = useState('upcoming')
+  const movies = useMovies(movieType)
+  const { language, setLanguage } = useLanguage()
 
   useEffect(() => {
     console.log('Me llamo siempre') 
   })
-
-  useEffect(() => {
-    console.log('Me llamo solo una vez')
-
-    fetch(`https://api.themoviedb.org/3/movie/${movieType}?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=es-CL`)
-      .then(response => response.json())
-      .then((upcoming) => {
-        console.log(upcoming)
-        const newMovies = upcoming.results.map(movie => {
-          return {
-            ...movie,
-            poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-          }
-        })
-        setMovies(newMovies)
-      })
-  }, [movieType])
 
   useEffect(() => {
     console.log('Me llamo cuando searchText cambia de valor:', searchText)
@@ -64,6 +50,17 @@ function App() {
 
   return (
     <>
+      <select
+        value={language}
+        onChange={(event) => setLanguage(event.target.value)}
+      >
+        <option value="es-CL">
+          {language == "es-CL" ? 'Español' : 'Spanish'}
+        </option>
+        <option value="en">
+          {language == "es-CL" ? 'Inglés' : 'English'}
+        </option>
+      </select>
       <Header />
       <Button variant="contained">
         Hello World!
