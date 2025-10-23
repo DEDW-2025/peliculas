@@ -6,6 +6,8 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import { NavLink } from 'react-router';
 
 export default function SearchAppBar({ value, onChange, language, onLanguageChange }) {
   return (
@@ -16,10 +18,36 @@ export default function SearchAppBar({ value, onChange, language, onLanguageChan
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block' } }}
           >
             Cartelera Comunidad Castillo
           </Typography>
+          <Box sx={{ flexGrow: 1, display: 'flex', ml: 3 }}>
+            <Button
+              component={NavLink}
+              to="/upcoming"
+              sx={{
+                color: 'white',
+                '&.active': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                }
+              }}
+            >
+              Próximas películas
+            </Button>
+            <Button
+              component={NavLink}
+              to="/now_playing"
+              sx={{
+                color: 'white',
+                '&.active': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                }
+              }}
+            >
+              En cartelera
+            </Button>
+          </Box>
           <Box
             sx={{
               position: 'relative',
