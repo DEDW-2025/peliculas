@@ -6,11 +6,12 @@ export default function MoviePage() {
     const [movie, setMovie] = useState()
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`).then((r) => r.json()).then((movie) => {
-            console.log(movie)
-            setMovie(movie)
+        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`).then((r) => r.json()).then((m) => {
+            console.log(m)
+            setMovie(m)
         })
     }, [id])
+
 
     if (!movie) {
         return "Cargando..."
